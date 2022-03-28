@@ -1,2 +1,2 @@
-# pixel-editor
-pixel editor
+# Editor
+Editor
