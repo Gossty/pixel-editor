@@ -10,6 +10,10 @@ div{
   font-size: 20px;
 }
 
+.navbar-custom{
+  background-color: rgb(34, 31, 43);
+}
+
 
 
 canvas {
