@@ -8,6 +8,7 @@ var contrast;
 var saturate;
 var pixelating;
 var blure;
+var dropShadow;
 
 var pixelStack = [];
 
@@ -15,7 +16,7 @@ const downloadBtn = document.getElementById("download-btn");
 const uploadFile = document.getElementById("upload-file");
 const revertBtn = document.getElementById("revert-btn");
 
-var size = 0;
+var size;
 
 
 //Filters and effect
@@ -27,6 +28,8 @@ document.addEventListener('click', (e) => {
 		size = parseInt(size);
 		pixelating = size;
 		pixelate(img, pixelating);
+		ctx.filter = `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturate}%) blur(${blure}px)`
+		ctx.drawImage(img, 0, 0, img.width, img.height);
 	}
 
 	else if (e.target.classList.contains('filter-btn')) {
@@ -60,13 +63,63 @@ document.addEventListener('click', (e) => {
 		}
 		else if (e.target.classList.contains('blur-reduce')) {
 			if (blure !== 0)
-			blure -= 3;
+				blure -= 3;
+		}
+		ctx.filter = `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturate}%) blur(${blure}px)`
+		ctx.drawImage(img, 0, 0, img.width, img.height);
+
+		if (e.target.classList.contains('vintage-add')) {
+			Caman("#canvas", img, function () {
+				this.vintage().render();
+			});
+		}
+		else if (e.target.classList.contains('lomo-add')) {
+			Caman("#canvas", img, function () {
+				this.lomo().render();
+			});
+		}
+
+		else if (e.target.classList.contains("sincity-add")) {
+			Caman("#canvas", img, function () {
+				this.sinCity().render();
+			});
+		}
+		else if (e.target.classList.contains("crossprocess-add")) {
+			Caman("#canvas", img, function () {
+				this.crossProcess().render();
+			});
+		}
+
+		else if (e.target.classList.contains("nostalgia-add")) {
+			Caman("#canvas", img, function () {
+				this.nostalgia().render();
+			});
 		}
 	}
-	saturate += 25;
+	else if (e.target.classList.contains("application")) {
+		ctx.filter = `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturate}%) blur(${blure}px)`
+		ctx.drawImage(img, 0, 0, img.width, img.height);
+
+	}
+})
+
+
+// Revert Filters
+revertBtn.addEventListener("click", e => {
+	brightness = 100;
+	contrast = 100;
+	saturate = 100;
+	pixelating = 1;
+	blure = 0;
+	pixelating = 1;
+	img.src = pixelStack[0];
 	ctx.filter = `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturate}%) blur(${blure}px)`
 	ctx.drawImage(img, 0, 0, img.width, img.height);
-})
+	Caman("#canvas", img, function() {
+		this.revert();
+	  });
+});
+  
 
 /**
  * Helper method for pixelating
@@ -99,8 +152,9 @@ function pixelate(img, pixelationFactor) {
 		  context.fillRect(x, y, pixelationFactor, pixelationFactor);
 		}
 	}
-	pixelStack.push(img.src);
 	img.src = canv.toDataURL();
+	ctx.filter = `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturate}%) blur(${blure}px)`
+	ctx.drawImage(img, 0, 0, img.width, img.height);
 }
 
 
@@ -110,7 +164,7 @@ uploadFile.addEventListener("change", () => {
 	brightness = 100;
 	contrast = 100;
 	saturate = 100;
-	pixelating = 0;
+	pixelating = 1;
 	blure = 0;
 	pixelStack = [];
 	
@@ -126,7 +180,7 @@ uploadFile.addEventListener("change", () => {
   		"load",
     	() => {
 			img = new Image();
-      		img.src = reader.result;
+			img.src = reader.result;
 			pixelStack.push(img.src);
 			size = 0;
       		img.onload = function() {
