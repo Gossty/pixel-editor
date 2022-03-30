@@ -12,9 +12,35 @@ div{
 
 .navbar-custom{
   background-color: rgb(34, 31, 43);
+  position: sticky; 
+  top: 0; 
+  z-index: 100;
+  border-bottom: 1px solid aqua;
+  border-radius: 20px;
+}
+
+.titie-custom {
+  color:aqua; 
+  font-family: 'Common Pixel', sans-serif; 
+  font-size: 40px;
 }
 
 
+.p1{
+  color:crimson; 
+  border:crimson;
+  padding: 5px; 
+  font-weight: 900; 
+  font-size: 17px;
+}
+.p2{
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.input-custom {
+  margin-top: 20px;
+}
 
 canvas {
   display: block;
@@ -25,10 +51,16 @@ canvas {
   background: rgb(44, 44, 46);
 }
 
+.btn-custom{
+  color: aqua
+}
+
+.coll-custom{
+  margin-bottom: 10px;
+}
+
 button{
   font-family: 'Common Pixel', sans-serif; 
-  text-emphasis-color: aliceblue;
-  text-decoration-color: aliceblue;
   font-size: 15px;
 }
 

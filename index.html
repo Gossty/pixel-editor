@@ -17,13 +17,14 @@
 <body>
   <nav class="navbar navbar-custom">
     <div class="container">
-      <titie style="color:aliceblue; font-family: 'Common Pixel', sans-serif; font-size: 40px;">THE EDITOR</titie>
+      <titie class="titie-custom" >THE EDITOR</titie>
+      <p1 class="p1">PLEASE USE MOZILLA FIREFOX FOR FULL COMPATIBILITY</p1>
     </div>
   </nav>
   <div class="container">
     <div class="row">
       <div class="col-md-8 m-auto">
-        <div  class="custom-file mb-3">
+        <div class="custom-file mb-3 input-custom">
           <input type="file" class="custom-file-input" id="upload-file">
         </div>
         <canvas id="canvas"></canvas>
@@ -31,7 +32,7 @@
         <h4 class="text-center my-3"> PIXELATE</h4>
         <div class="col text-center">
           <div class="text-center btn-group btn-group-sm">
-            1 <input class = "pixel" type="range" min="1" max="100" step="4" id="size" value="0" size="100"> 100
+            <p2 class="p2">1</p2><input class = "pixel" type="range" min="1" max="100" step="4" id="size" value="0" size="100"><p2 class="p2">100</p2>
           </div>
           <button class="application" >ClICK TO APPLY</button>
         </div>
@@ -40,34 +41,34 @@
   
         <div class="row md-3 text-center">
               <div class="col-lg-3">
-                <div class="btn-group btn-group-sm">
-                  <button class="filter-btn brightness-reduce btn btn-info">-</button>
-                  <button class="btn btn-secondary btn-disabled" disabled>BRIGHTNESS</button>
-                  <button class="filter-btn brightness-add btn btn-info">+</button>
+                <div class="btn-group btn-group-sm" >
+                  <button class="filter-btn brightness-reduce btn btn-info" style="margin-bottom: 10px;">-</button>
+                  <button class="btn-secondary" style="color:rgb(0, 255, 255); margin-bottom: 10px;" disabled>BRIGHTNESS</button>
+                  <button class="filter-btn brightness-add btn btn-info" style="margin-bottom: 10px;" >+</button>
                 </div>
               </div>
   
               <div class="col-lg-3">
                 <div class="btn-group btn-group-sm">
-                  <button class="filter-btn contrast-reduce btn btn-info">-</button>
-                  <button class="btn btn-secondary btn-disabled" disabled>CONTRAST</button>
-                  <button class="filter-btn contrast-add btn btn-info">+</button>
+                  <button class="filter-btn contrast-reduce btn btn-info" style="margin-bottom: 10px;">-</button>
+                  <button class="btn-secondary" style="color:rgb(0, 255, 255); margin-bottom: 10px;" disabled>CONTRAST</button>
+                  <button class="filter-btn contrast-add btn btn-info" style="margin-bottom: 10px;">+</button>
                 </div>
               </div>
   
               <div class="col-lg-3">
                 <div class="btn-group btn-group-sm">
-                  <button class="filter-btn saturation-reduce btn btn-info">-</button>
-                  <button class="btn btn-secondary btn-disabled" disabled>SATURATION</button>
-                  <button class="filter-btn saturation-add btn btn-info">+</button>
+                  <button class="filter-btn saturation-reduce btn btn-info" style="margin-bottom: 10px;">-</button>
+                  <button class="btn-secondary" style="color:rgb(0, 255, 255); margin-bottom: 10px;" disabled>SATURATION</button>
+                  <button class="filter-btn saturation-add btn btn-info" style="margin-bottom: 10px;">+</button>
                 </div>
               </div>
   
               <div class="col-lg-3">
                 <div class="btn-group btn-group-sm">
-                  <button class="filter-btn blur-reduce btn btn-info">-</button>
-                  <button class="btn btn-secondary btn-disabled" disabled>BLUR</button>
-                  <button class="filter-btn blur-add btn btn-info">+</button>
+                  <button class="filter-btn blur-reduce btn btn-info" style="margin-bottom: 10px;">-</button>
+                  <button class="btn-secondary" style="color:rgb(0, 255, 255); margin-bottom: 10px;;" disabled>BLUR</button>
+                  <button class="filter-btn blur-add btn btn-info" style="margin-bottom: 10px;">+</button>
                 </div>
               </div>
         </div>
@@ -76,34 +77,34 @@
         <h4 class="text-center my-3">EFFECTS</h4>
   
         <div class="row mb-3">
-          <div class="col-md-3">
-            <button class="filter-btn vintage-add btn btn-dark btn-block">
+          <div class="col-md-3 coll-custom">
+            <button class="filter-btn vintage-add btn btn-dark btn-block btn-custom">
                 VINTAGE
               </button>
           </div>
-          <div class="col-md-3">
-            <button class="filter-btn lomo-add btn btn-dark btn-block">
+          <div class="col-md-3 coll-custom">
+            <button class="filter-btn lomo-add btn btn-dark btn-block btn-custom">
                 LOMO
               </button>
           </div>
-          <div class="col-md-3">
-            <button class="filter-btn inverted-add btn btn-dark btn-block">
+          <div class="col-md-3 coll-custom">
+            <button class="filter-btn inverted-add btn btn-dark btn-block btn-custom">
                 INVERTED
               </button>
           </div>
 
-          <div class="col-md-3">
-            <button class="filter-btn pinhole-add btn btn-dark btn-block">
+          <div class="col-md-3 coll-custom">
+            <button class="filter-btn pinhole-add btn btn-dark btn-block btn-custom">
                 PINHOLE
               </button>
           </div>
-          <div class="col-md-3">
-            <button class="filter-btn sepia-add btn btn-dark btn-block">
+          <div class="col-md-3 coll-custom">
+            <button class="filter-btn sepia-add btn btn-dark btn-block btn-custom">
                 SEPIA
               </button>
           </div>
-          <div class="col-md-3">
-            <button class="filter-btn x-ray-add btn btn-dark btn-block">
+          <div class="col-md-3 coll-custom">
+            <button class="filter-btn x-ray-add btn btn-dark btn-block btn-custom">
                 X-RAY
               </button>
           </div>
@@ -111,10 +112,10 @@
         </div>
   
         <div class="row mt-5">
-          <div class="col-md-6">
+          <div class="col-md-6" style="margin-bottom: 10px;">
             <button id="download-btn" class="btn btn-primary btn-block">DOWNLOAD IMAGE</button>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6"style="margin-bottom: 10px;"> 
             <button id="revert-btn" class="btn btn-danger btn-block">REMOVE FILTERS</button>
           </div>
         </div>
