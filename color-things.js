@@ -3,23 +3,29 @@ const ctx = canvas.getContext("2d");
 let img = new Image();
 let imageName = '';
 
+// variables needed to add filters
 var brightness;
 var contrast;
 var saturate;
 var pixelating;
 var blure;
-var dropShadow;
+var invert;
+var sepia;
+var size;
+
 
 var pixelStack = [];
 
+// buttons to work with download/upload
 const downloadBtn = document.getElementById("download-btn");
 const uploadFile = document.getElementById("upload-file");
 const revertBtn = document.getElementById("revert-btn");
 
-var size;
 
 
-//Filters and effect
+/**
+ * Adding filters and effects.
+ */
 document.addEventListener('click', (e) => {
 
 	
@@ -28,7 +34,8 @@ document.addEventListener('click', (e) => {
 		size = parseInt(size);
 		pixelating = size;
 		pixelate(img, pixelating);
-		ctx.filter = `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturate}%) blur(${blure}px)`
+		ctx.filter = `brightness(${brightness}%) contrast(${contrast}%) 
+		saturate(${saturate}%) blur(${blure}px) invert(${invert}%) sepia(${sepia}%)`
 		ctx.drawImage(img, 0, 0, img.width, img.height);
 	}
 
@@ -57,7 +64,8 @@ document.addEventListener('click', (e) => {
 		else if (e.target.classList.contains('saturation-reduce')) {
 			saturate -= 25;
 		}
-
+			
+		// blur 
 		else if (e.target.classList.contains('blur-add')) {
 			blure += 3;
 		}
@@ -65,9 +73,25 @@ document.addEventListener('click', (e) => {
 			if (blure !== 0)
 				blure -= 3;
 		}
-		ctx.filter = `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturate}%) blur(${blure}px)`
-		ctx.drawImage(img, 0, 0, img.width, img.height);
+		
+		// adding effects
+		else if (e.target.classList.contains("inverted-add")) {
+			invert = 100;
+		}
+		else if (e.target.classList.contains("sepia-add")) {
+			sepia = 100;
+		}
+		else if (e.target.classList.contains("x-ray-add")) {
+			sepia = 100;
+			invert = 100;
+		}
 
+		// displaying all filters
+		ctx.filter = `brightness(${brightness}%) contrast(${contrast}%) 
+		saturate(${saturate}%) blur(${blure}px) invert(${invert}%) sepia(${sepia}%)`
+		ctx.drawImage(img, 0, 0, img.width, img.height);
+		
+		// additional effects added with Caman.js
 		if (e.target.classList.contains('vintage-add')) {
 			Caman("#canvas", img, function () {
 				this.vintage().render();
@@ -78,42 +102,38 @@ document.addEventListener('click', (e) => {
 				this.lomo().render();
 			});
 		}
-
-		else if (e.target.classList.contains("sincity-add")) {
+		else if (e.target.classList.contains('pinhole-add')) {
 			Caman("#canvas", img, function () {
-				this.sinCity().render();
-			});
-		}
-		else if (e.target.classList.contains("crossprocess-add")) {
-			Caman("#canvas", img, function () {
-				this.crossProcess().render();
-			});
-		}
-
-		else if (e.target.classList.contains("nostalgia-add")) {
-			Caman("#canvas", img, function () {
-				this.nostalgia().render();
+				this.pinhole().render();
 			});
 		}
 	}
+		
+	// 
 	else if (e.target.classList.contains("application")) {
-		ctx.filter = `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturate}%) blur(${blure}px)`
+		ctx.filter = `brightness(${brightness}%) contrast(${contrast}%) 
+		saturate(${saturate}%) blur(${blure}px) invert(${invert}%) sepia(${sepia}%)`
 		ctx.drawImage(img, 0, 0, img.width, img.height);
-
 	}
 })
 
 
-// Revert Filters
+// Revert to initial
 revertBtn.addEventListener("click", e => {
+	// changing variables to initial
 	brightness = 100;
 	contrast = 100;
 	saturate = 100;
 	pixelating = 1;
 	blure = 0;
+	invert = 0;
+	sepia = 0;
 	pixelating = 1;
+
 	img.src = pixelStack[0];
-	ctx.filter = `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturate}%) blur(${blure}px)`
+	// drawing the image
+	ctx.filter = `brightness(${brightness}%) contrast(${contrast}%) 
+		saturate(${saturate}%) blur(${blure}px) invert(${invert}%) sepia(${sepia}%)`
 	ctx.drawImage(img, 0, 0, img.width, img.height);
 	Caman("#canvas", img, function() {
 		this.revert();
@@ -123,8 +143,8 @@ revertBtn.addEventListener("click", e => {
 
 /**
  * Helper method for pixelating
- * @param {*} img 
- * @param {*} pixelationFactor 
+ * @param {*} img – the given image
+ * @param {*} pixelationFactor – pixelation factor
  */
 function pixelate(img, pixelationFactor) {
 	img.src = pixelStack[0];
@@ -152,8 +172,10 @@ function pixelate(img, pixelationFactor) {
 		  context.fillRect(x, y, pixelationFactor, pixelationFactor);
 		}
 	}
+	// changing image source to a new one
 	img.src = canv.toDataURL();
-	ctx.filter = `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturate}%) blur(${blure}px)`
+	ctx.filter = `brightness(${brightness}%) contrast(${contrast}%) 
+		saturate(${saturate}%) blur(${blure}px) invert(${invert}%) sepia(${sepia}%)`
 	ctx.drawImage(img, 0, 0, img.width, img.height);
 }
 
@@ -161,9 +183,12 @@ function pixelate(img, pixelationFactor) {
 
 // Uploading a file
 uploadFile.addEventListener("change", () => {
+	// Setting variables to default values
 	brightness = 100;
 	contrast = 100;
 	saturate = 100;
+	invert = 0;
+	sepia = 0;
 	pixelating = 1;
 	blure = 0;
 	pixelStack = [];
@@ -171,6 +196,7 @@ uploadFile.addEventListener("change", () => {
 	const file = document.getElementById("upload-file").files[0];
   	const reader = new FileReader();
 
+	// when a file is added:
   	if (file) {
     	imageName = file.name;
     	reader.readAsDataURL(file);
@@ -207,9 +233,9 @@ downloadBtn.addEventListener("click", () => {
   if (fileExtension === ".jpg" || fileExtension === ".png") {
     newFilename = imageName.substring(0, imageName.length - 4) + "-effects.jpg";
   }
-
   download(canvas, newFilename);
 });
+
 
 function download(canvas, filename) {
   // Init event
