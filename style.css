@@ -49,10 +49,11 @@ canvas {
   width: 70%;
   height: auto;
   background: rgb(44, 44, 46);
+  position:static;
 }
 
 .btn-custom{
-  color: aqua
+  color: aqua;
 }
 
 .coll-custom{
